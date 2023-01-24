@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val authRepositry: AuthenticationRepository
+    private val authRepository: AuthenticationRepository
 ) : ViewModel() {
 
     fun register(
         _name: String, _email: String, _password: String
     ): LiveData<Resource<LoginResponse>> {
-        return authRepositry.register(
+        return authRepository.register(
             _name, _email, _password
         )
     }
@@ -24,7 +24,7 @@ class AuthenticationViewModel @Inject constructor(
     fun login(
         _email: String, _password: String
     ): LiveData<Resource<LoginResponse>> {
-        return authRepositry.login(
+        return authRepository.login(
             _email, _password
         )
     }

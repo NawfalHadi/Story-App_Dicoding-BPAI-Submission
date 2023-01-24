@@ -1,9 +1,12 @@
 package com.thatnawfal.storyappdicoding.presentation.auth.ui
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.activity.viewModels
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.databinding.ActivityAuthBinding
@@ -21,6 +24,8 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        hideSystemUI()
 
         with(binding.btnSignup){
             setOnClickListener {
@@ -101,5 +106,18 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun hideSystemUI() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 }

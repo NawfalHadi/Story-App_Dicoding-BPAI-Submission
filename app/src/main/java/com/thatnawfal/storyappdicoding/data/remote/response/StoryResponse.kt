@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class StoryResponse(
     @SerializedName("error")
-    val error: Boolean?,
+    val error: Boolean,
     @SerializedName("listStory")
-    val listStory: List<Story?>?,
+    val listStory: List<Story>,
     @SerializedName("message")
     val message: String?,
     @SerializedName("story")
@@ -20,7 +20,7 @@ data class Story(
     @SerializedName("description")
     val description: String?,
     @SerializedName("id")
-    val id: String?,
+    val id: String,
     @SerializedName("lat")
     val lat: Double?,
     @SerializedName("lon")
