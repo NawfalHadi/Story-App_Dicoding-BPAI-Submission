@@ -42,14 +42,15 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         private val binding : ItemStoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bindingView(story: Story) {
-            binding.itemListName.text = "${story.name} desc.. ${story.description}"
-
-            onStoryClickedCallback.storyClicked(story.id)
+            binding.itemListName.text = "${story.name}"
+            binding.itemListName.setOnClickListener {
+                onStoryClickedCallback.storyClicked(story)
+            }
         }
     }
 
     interface OnStoryClickedCallback {
-        fun storyClicked(id: String)
+        fun storyClicked(story: Story)
     }
 
 }

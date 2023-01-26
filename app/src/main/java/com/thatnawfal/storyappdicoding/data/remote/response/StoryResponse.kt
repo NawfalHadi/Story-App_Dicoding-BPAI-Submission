@@ -1,7 +1,9 @@
 package com.thatnawfal.storyappdicoding.data.remote.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class StoryResponse(
     @SerializedName("error")
@@ -14,6 +16,7 @@ data class StoryResponse(
     val story: Story?
 )
 
+@Parcelize
 data class Story(
     @SerializedName("createdAt")
     val createdAt: String?,
@@ -29,4 +32,4 @@ data class Story(
     val name: String?,
     @SerializedName("photoUrl")
     val photoUrl: String?
-)
+) : Parcelable

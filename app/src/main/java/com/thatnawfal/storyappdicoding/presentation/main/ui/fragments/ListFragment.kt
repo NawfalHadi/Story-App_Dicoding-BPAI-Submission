@@ -5,10 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.data.remote.response.Story
 import com.thatnawfal.storyappdicoding.databinding.FragmentListBinding
 import com.thatnawfal.storyappdicoding.presentation.main.adapter.StoryAdapter
@@ -37,10 +38,10 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showsStroies()
+        showStories()
     }
 
-    private fun showsStroies() {
+    private fun showStories() {
         with(binding){
             storyViewModel.getStories(HomeActivity.TEMP_TOKEN).observe(viewLifecycleOwner){
                 when(it){
@@ -65,8 +66,10 @@ class ListFragment : Fragment() {
         }
 
         storyAdapter.itemListener(object : StoryAdapter.OnStoryClickedCallback {
-            override fun storyClicked(id: String) {
-                Log.e("Stories", "Go To Detail.. with ID : $id")
+            override fun storyClicked(story: Story) {
+                val mBundle = Bundle()
+                mBundle.putParcelable(DetailFragment.STORY_KEY, story)
+                findNavController().navigate(R.id.action_listFragment_to_detailFragment, mBundle)
             }
         })
     }

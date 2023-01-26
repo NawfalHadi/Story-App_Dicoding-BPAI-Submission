@@ -8,10 +8,11 @@
         <entry key="app/src/main/res/drawable/bg_button_enabled.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/bg_circle_white.xml" value="0.3265" />
         <entry key="app/src/main/res/drawable/bg_orange_200.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_capture.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33697916666666666" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.3515625" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/fragment_preview.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_story.xml" value="0.3515625" />
