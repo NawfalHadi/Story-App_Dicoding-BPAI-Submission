@@ -10,4 +10,7 @@
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_your_email">Enter your email</string>
     <string name="story">Story</string>
+    <string name="upload_story">Upload Story</string>
+    <string name="backdrop_story">backdrop story</string>
+    <string name="full_image_of_story">full image of story</string>
 </resources>

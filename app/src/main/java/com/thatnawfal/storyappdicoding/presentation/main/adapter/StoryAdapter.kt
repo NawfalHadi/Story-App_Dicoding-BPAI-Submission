@@ -1,10 +1,14 @@
 package com.thatnawfal.storyappdicoding.presentation.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.thatnawfal.storyappdicoding.data.remote.response.Story
 import com.thatnawfal.storyappdicoding.databinding.ItemStoryBinding
 
@@ -42,8 +46,18 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         private val binding : ItemStoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bindingView(story: Story) {
-            binding.itemListName.text = "${story.name}"
-            binding.itemListName.setOnClickListener {
+
+            binding.ivItemStoryFull.load(story.photoUrl)
+            binding.ivItemStoryBackdrop.load(story.photoUrl)
+
+            binding.tvItemStoryName.text = "${story.name}"
+
+            binding.cvItemStory.setOnLongClickListener {
+                binding.blackLayout.visibility = View.VISIBLE
+                binding.ivItemStoryFull.visibility = View.VISIBLE
+                true
+            }
+            binding.cvItemStory.setOnClickListener {
                 onStoryClickedCallback.storyClicked(story)
             }
         }
