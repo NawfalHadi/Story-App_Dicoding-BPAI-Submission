@@ -1,12 +1,14 @@
 package com.thatnawfal.storyappdicoding.presentation.main.ui.fragments
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thatnawfal.storyappdicoding.R
@@ -37,7 +39,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
         showStories()
     }
 
@@ -66,10 +68,10 @@ class ListFragment : Fragment() {
         }
 
         storyAdapter.itemListener(object : StoryAdapter.OnStoryClickedCallback {
-            override fun storyClicked(story: Story) {
+            override fun storyClicked(story: Story, extras: FragmentNavigator.Extras) {
                 val mBundle = Bundle()
                 mBundle.putParcelable(DetailFragment.STORY_KEY, story)
-                findNavController().navigate(R.id.action_listFragment_to_detailFragment, mBundle)
+                findNavController().navigate(R.id.action_listFragment_to_detailFragment, mBundle, null, extras)
             }
         })
     }

@@ -1,10 +1,10 @@
 package com.thatnawfal.storyappdicoding.presentation.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -58,13 +58,18 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
                 true
             }
             binding.cvItemStory.setOnClickListener {
-                onStoryClickedCallback.storyClicked(story)
+                val extras = FragmentNavigatorExtras(
+//                    binding.tvItemStoryName to "TextName",
+                    binding.ivItemStoryFull to "ImageDetail"
+//                    binding.ivItemStoryProfile to "ImageProfile"
+                )
+                onStoryClickedCallback.storyClicked(story, extras)
             }
         }
     }
 
     interface OnStoryClickedCallback {
-        fun storyClicked(story: Story)
+        fun storyClicked(story: Story, extras: FragmentNavigator.Extras)
     }
 
 }

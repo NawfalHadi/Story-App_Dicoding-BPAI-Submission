@@ -5,15 +5,24 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.thatnawfal.storyappdicoding.data.remote.response.LoginResult
 import com.thatnawfal.storyappdicoding.databinding.ActivityMainBinding
+import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
 import com.thatnawfal.storyappdicoding.presentation.auth.ui.AuthActivity
+import com.thatnawfal.storyappdicoding.presentation.main.ui.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+    private val authViewModel: AuthenticationViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,7 +49,13 @@ class MainActivity : AppCompatActivity() {
                 ) {}
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                    startActivity(Intent(this@MainActivity, AuthActivity::class.java))
+                    authViewModel.getSession().observe(this@MainActivity){
+                        if (it.token == "") {
+                            startActivity(Intent(this@MainActivity, AuthActivity::class.java))
+                        } else {
+                            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                        }
+                    }
                     finish()
                 }
 

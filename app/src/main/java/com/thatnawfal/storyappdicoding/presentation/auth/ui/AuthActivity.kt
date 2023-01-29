@@ -59,7 +59,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun signupValid(_name: String, _email: String, _pass: String) {
-        authViewModel.register(_name, _email, _pass).observe(this){
+        authViewModel.register(_name, _email, _pass).observe(this@AuthActivity){
             when(it){
                 is Resource.Loading -> {
                     Log.e("Sign Up", "Signing Up...")
@@ -98,6 +98,12 @@ class AuthActivity : AppCompatActivity() {
                     Log.e("Sign In", (it.message ?: it.payload?.message).toString())
                 }
                 is Resource.Success -> {
+                    authViewModel.saveSession(
+                        it.payload?.loginResult?.token.toString(),
+                        it.payload?.loginResult?.name.toString(),
+                        it.payload?.loginResult?.userId.toString()
+                    )
+
                     startActivity(Intent(this@AuthActivity, HomeActivity::class.java))
                     finish()
                 }
