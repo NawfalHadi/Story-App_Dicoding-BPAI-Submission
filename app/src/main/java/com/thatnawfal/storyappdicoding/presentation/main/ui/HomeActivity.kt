@@ -45,8 +45,4 @@ class HomeActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
-
-    companion object {
-        const val TEMP_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUVERmJIRnpkcHh5cXdlcEgiLCJpYXQiOjE2NzQ1NTIwMTB9.kij3l1Z45p3u1SKqKuYuepxEW43ZZkiAWxu1HnUmC7Y"
-    }
 }

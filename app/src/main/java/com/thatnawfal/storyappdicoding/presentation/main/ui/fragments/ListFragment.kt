@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.data.remote.response.Story
 import com.thatnawfal.storyappdicoding.databinding.FragmentListBinding
+import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
 import com.thatnawfal.storyappdicoding.presentation.main.adapter.StoryAdapter
 import com.thatnawfal.storyappdicoding.presentation.main.bussiness.StoryViewModel
 import com.thatnawfal.storyappdicoding.presentation.main.ui.HomeActivity
@@ -26,6 +27,7 @@ class ListFragment : Fragment() {
     private lateinit var binding : FragmentListBinding
 
     private val storyViewModel: StoryViewModel by viewModels()
+    private val authViewModel: AuthenticationViewModel by viewModels()
     private val storyAdapter: StoryAdapter by lazy { StoryAdapter() }
 
     override fun onCreateView(
@@ -40,12 +42,14 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
-        showStories()
+        authViewModel.getSession().observe(viewLifecycleOwner){
+            showStories("Bearer ${it.token}")
+        }
     }
 
-    private fun showStories() {
+    private fun showStories(token: String) {
         with(binding){
-            storyViewModel.getStories(HomeActivity.TEMP_TOKEN).observe(viewLifecycleOwner){
+            storyViewModel.getStories(token).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading -> Log.e("Stories", "Fetching...")
                     is Resource.Success -> {
