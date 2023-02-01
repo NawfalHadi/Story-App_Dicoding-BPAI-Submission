@@ -1,6 +1,7 @@
 package com.thatnawfal.storyappdicoding.presentation.main.ui.fragments
 
 import android.os.Bundle
+import android.transition.ChangeBounds
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
@@ -23,14 +24,13 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        sharedElementEnterTransition = ChangeBounds()
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
 
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)

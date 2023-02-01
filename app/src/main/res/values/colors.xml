@@ -12,4 +12,6 @@
     <color name="orange_200">#FFD741</color>
     <color name="orange_500">#FFBB32</color>
     <color name="orange_800">#FFAB00</color>
+    <color name="transparant">#00000000</color>
+    <color name="transparant_50">#BF000000</color>
 </resources>

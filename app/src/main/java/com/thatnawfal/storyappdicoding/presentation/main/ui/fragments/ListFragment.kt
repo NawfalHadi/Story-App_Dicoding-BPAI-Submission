@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.data.remote.response.Story
 import com.thatnawfal.storyappdicoding.databinding.FragmentListBinding
@@ -41,9 +42,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
         authViewModel.getSession().observe(viewLifecycleOwner){
             showStories("Bearer ${it.token}")
+        }
+
+        binding.bgBtnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_previewFragment)
         }
     }
 
@@ -69,6 +73,8 @@ class ListFragment : Fragment() {
             rvStories.setHasFixedSize(true)
             rvStories.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             rvStories.adapter = storyAdapter
+
+            // onscrollchanged to hide the btn for adding story
         }
 
         storyAdapter.itemListener(object : StoryAdapter.OnStoryClickedCallback {

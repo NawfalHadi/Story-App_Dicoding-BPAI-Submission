@@ -1,6 +1,8 @@
 package com.thatnawfal.storyappdicoding.presentation.main.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.FragmentNavigator
@@ -45,26 +47,45 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     inner class ViewHolder(
         private val binding : ItemStoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ClickableViewAccessibility")
         fun bindingView(story: Story) {
 
             binding.ivItemStoryFull.load(story.photoUrl)
-            binding.ivItemStoryBackdrop.load(story.photoUrl)
+            binding.ivDetail.load(story.photoUrl)
 
-            binding.tvItemStoryName.text = "${story.name}"
+            binding.tvNames.text = "${story.name}"
 
-            binding.cvItemStory.setOnLongClickListener {
-                binding.blackLayout.visibility = View.VISIBLE
-                binding.ivItemStoryFull.visibility = View.VISIBLE
-                true
-            }
+//            binding.cvItemStory.setOnLongClickListener {
+//                binding.blackLayout.visibility = View.VISIBLE
+//                binding.ivItemStoryFull.visibility = View.VISIBLE
+//                true
+//            }
             binding.cvItemStory.setOnClickListener {
                 val extras = FragmentNavigatorExtras(
-//                    binding.tvItemStoryName to "TextName",
-                    binding.ivItemStoryFull to "ImageDetail"
+                    binding.tvNames to "TextName",
+                    binding.ivDetail to "ImageDetail"
 //                    binding.ivItemStoryProfile to "ImageProfile"
                 )
+                extras.sharedElements
                 onStoryClickedCallback.storyClicked(story, extras)
             }
+
+
+            binding.cvItemStory.setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        binding.blackLayout.visibility = View.VISIBLE
+                        binding.ivItemStoryFull.visibility = View.VISIBLE
+                        true
+                    }
+                    else -> {
+                        binding.blackLayout.visibility = View.INVISIBLE
+                        binding.ivItemStoryFull.visibility = View.INVISIBLE
+                        true
+                    }
+                }
+            }
+
         }
     }
 
