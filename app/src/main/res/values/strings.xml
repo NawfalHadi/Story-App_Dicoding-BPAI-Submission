@@ -15,4 +15,5 @@
     <string name="full_image_of_story">full image of story</string>
     <string name="use_camera">use camera</string>
     <string name="add_story">add story</string>
+    <string name="choose_image">Choose Image</string>
 </resources>

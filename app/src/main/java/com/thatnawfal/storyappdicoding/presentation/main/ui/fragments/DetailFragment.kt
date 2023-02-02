@@ -34,6 +34,7 @@ class DetailFragment : Fragment() {
 
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)
+
     }
 
     private fun bindingView(story: Story) {
