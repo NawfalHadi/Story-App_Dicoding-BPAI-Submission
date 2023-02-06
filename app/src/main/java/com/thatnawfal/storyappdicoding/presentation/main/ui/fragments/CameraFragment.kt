@@ -43,9 +43,10 @@ class CameraFragment : Fragment() {
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//    }
+    override fun onResume() {
+        super.onResume()
+        startCamera()
+    }
 
     private fun switchCamera() {
         cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
@@ -92,14 +93,14 @@ class CameraFragment : Fragment() {
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    Toast.makeText(requireContext(), "Captured", Toast.LENGTH_SHORT).show()
-
-                    findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                        PreviewFragment.CAMERA_X_RESULT, photoFile)
+                    findNavController().apply {
+                        previousBackStackEntry?.savedStateHandle?.set(PreviewFragment.CAMERA_X_RESULT, photoFile)
+                        popBackStack()
+                    }
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_SHORT).show()
                 }
 
             }
