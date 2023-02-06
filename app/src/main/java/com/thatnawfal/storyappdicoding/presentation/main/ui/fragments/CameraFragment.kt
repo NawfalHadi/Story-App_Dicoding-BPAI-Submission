@@ -14,6 +14,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.thatnawfal.storyappdicoding.databinding.LayoutCameraxBinding
 import com.thatnawfal.storyappdicoding.utils.createFile
 
@@ -91,7 +92,10 @@ class CameraFragment : Fragment() {
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), "Captured", Toast.LENGTH_SHORT).show()
+
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                        PreviewFragment.CAMERA_X_RESULT, photoFile)
                 }
 
                 override fun onError(exception: ImageCaptureException) {

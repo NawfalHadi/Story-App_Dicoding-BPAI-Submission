@@ -3,6 +3,7 @@ package com.thatnawfal.storyappdicoding.presentation.main.ui.fragments
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -65,6 +66,13 @@ class PreviewFragment : Fragment() {
     }
 
     private fun actionSetup() {
+        val cameraxResult: File? = findNavController().currentBackStackEntry?.savedStateHandle?.get<File>(
+            CAMERA_X_RESULT)
+
+        if (cameraxResult != null) {
+            binding.ivPreview.setImageBitmap(BitmapFactory.decodeFile(cameraxResult.path))
+        }
+
         with(binding){
             btnCamera.setOnClickListener {
                 findNavController().navigate(R.id.action_previewFragment_to_cameraFragment)
@@ -98,7 +106,7 @@ class PreviewFragment : Fragment() {
     }
 
     companion object {
-        const val CAMERA_X_RESULT = 200
+        const val CAMERA_X_RESULT = "CAMERA_X_RESULT"
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
