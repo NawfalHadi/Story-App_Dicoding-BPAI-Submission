@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/bg_circle_white.xml" value="0.3265" />
         <entry key="app/src/main/res/drawable/bg_orange_200.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_capture.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_switch_camera.xml" value="0.259" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33697916666666666" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_preview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_story.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/layout_camerax.xml" value="0.17097264437689969" />
+        <entry key="app/src/main/res/layout/layout_camerax.xml" value="0.1" />
         <entry key="app/src/main/res/xml/activity_main_scene.xml" value="0.3359375" />
       </map>
     </option>

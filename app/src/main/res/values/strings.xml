@@ -16,4 +16,5 @@
     <string name="use_camera">use camera</string>
     <string name="add_story">add story</string>
     <string name="choose_image">Choose Image</string>
+    <string name="switch_camera">switch camera</string>
 </resources>
