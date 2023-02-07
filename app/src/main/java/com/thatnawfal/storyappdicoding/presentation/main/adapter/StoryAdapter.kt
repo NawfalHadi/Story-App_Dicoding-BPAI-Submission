@@ -55,37 +55,30 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
 
             binding.tvNames.text = "${story.name}"
 
-//            binding.cvItemStory.setOnLongClickListener {
-//                binding.blackLayout.visibility = View.VISIBLE
-//                binding.ivItemStoryFull.visibility = View.VISIBLE
-//                true
-//            }
             binding.cvItemStory.setOnClickListener {
                 val extras = FragmentNavigatorExtras(
                     binding.tvNames to "TextName",
-                    binding.ivDetail to "ImageDetail"
-//                    binding.ivItemStoryProfile to "ImageProfile"
+                    binding.cvItemStory to "CardImage",
+                    binding.ivProfile to "ImageProfile"
                 )
                 extras.sharedElements
                 onStoryClickedCallback.storyClicked(story, extras)
             }
 
-
-            binding.cvItemStory.setOnTouchListener { _, motionEvent ->
-                when(motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        binding.blackLayout.visibility = View.VISIBLE
-                        binding.ivItemStoryFull.visibility = View.VISIBLE
-                        true
-                    }
-                    else -> {
-                        binding.blackLayout.visibility = View.INVISIBLE
-                        binding.ivItemStoryFull.visibility = View.INVISIBLE
-                        true
-                    }
-                }
+            binding.btnFullscreen.setOnClickListener {
+                binding.blackLayout.visibility = View.VISIBLE
+                binding.ivItemStoryFull.visibility = View.VISIBLE
+                binding.btnFullscreen.visibility = View.GONE
+                binding.btnFullscreenExit.visibility = View.VISIBLE
             }
 
+            binding.btnFullscreenExit.setOnClickListener {
+                binding.blackLayout.visibility = View.INVISIBLE
+                binding.ivItemStoryFull.visibility = View.INVISIBLE
+                binding.btnFullscreen.visibility = View.VISIBLE
+                binding.btnFullscreenExit.visibility = View.GONE
+
+            }
         }
     }
 

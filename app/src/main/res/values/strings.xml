@@ -17,4 +17,10 @@
     <string name="add_story">add story</string>
     <string name="choose_image">Choose Image</string>
     <string name="switch_camera">switch camera</string>
+    <string name="rotate_image">rotate image</string>
+    <string name="lorem_ipsum">Lorem Ipsum dolor sit amet</string>
+    <string name="email_invalid">Email format is invalid</string>
+    <string name="password_invalid">Password must contain at least 6 character</string>
+    <string name="original_image">original image</string>
+    <string name="hide_original_image">hide original image</string>
 </resources>

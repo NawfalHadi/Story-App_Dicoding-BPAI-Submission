@@ -97,8 +97,6 @@
         android:contentDescription="@string/use_camera" />
 
 
-
-
     <!--  Bottom Menu -->
 
     <ImageView

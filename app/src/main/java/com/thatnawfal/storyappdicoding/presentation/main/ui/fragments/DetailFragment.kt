@@ -24,14 +24,16 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        sharedElementEnterTransition = ChangeBounds()
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)
 
@@ -41,6 +43,21 @@ class DetailFragment : Fragment() {
         with(binding){
             ivDetail.load(story.photoUrl)
             tvNames.text = story.name
+            tvDesc.text = story.description
+
+            btnFullscreen.setOnClickListener {
+                blackLayout.visibility = View.VISIBLE
+                ivOriginal.visibility = View.VISIBLE
+                btnFullscreen.visibility = View.GONE
+                btnFullscreenExit.visibility = View.VISIBLE
+            }
+
+            btnFullscreenExit.setOnClickListener {
+                blackLayout.visibility = View.INVISIBLE
+                ivOriginal.visibility = View.INVISIBLE
+                btnFullscreen.visibility = View.VISIBLE
+                btnFullscreenExit.visibility = View.GONE
+            }
         }
     }
 

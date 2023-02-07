@@ -14,15 +14,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.databinding.FragmentPreviewBinding
+import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
+import com.thatnawfal.storyappdicoding.utils.rotateBitmap
 import com.thatnawfal.storyappdicoding.utils.uriToFile
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class PreviewFragment : Fragment() {
 
     private lateinit var binding: FragmentPreviewBinding
+
+    private val authViewModel: AuthenticationViewModel by viewModels()
 
     private var getFile: File? = null
     private val launcherGallery = registerForActivityResult(
@@ -62,17 +69,25 @@ class PreviewFragment : Fragment() {
             permissionLauncher.launch(REQUIRED_PERMISSIONS[0])
         }
 
+        dataSetup()
         actionSetup()
     }
 
-    private fun actionSetup() {
+    private fun dataSetup() {
+        authViewModel.getSession().observe(viewLifecycleOwner){
+            binding.tvNamesPreview.text = it.name
+        }
+
         val cameraxResult: File? = findNavController().currentBackStackEntry?.savedStateHandle?.get<File>(
             CAMERA_X_RESULT)
 
         if (cameraxResult != null) {
+            getFile = cameraxResult
             binding.ivPreview.setImageBitmap(BitmapFactory.decodeFile(cameraxResult.path))
         }
+    }
 
+    private fun actionSetup() {
         with(binding){
             btnCamera.setOnClickListener {
                 findNavController().navigate(R.id.action_previewFragment_to_cameraFragment)
