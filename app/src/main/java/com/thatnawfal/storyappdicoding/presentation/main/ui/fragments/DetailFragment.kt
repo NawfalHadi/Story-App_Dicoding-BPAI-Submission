@@ -6,6 +6,7 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import coil.load
 import com.thatnawfal.storyappdicoding.R
@@ -19,6 +20,13 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
 
     private lateinit var storyData : Story
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,12 +36,11 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)
 
@@ -42,6 +49,7 @@ class DetailFragment : Fragment() {
     private fun bindingView(story: Story) {
         with(binding){
             ivDetail.load(story.photoUrl)
+            ivOriginal.load(story.photoUrl)
             tvNames.text = story.name
             tvDesc.text = story.description
 
@@ -58,6 +66,7 @@ class DetailFragment : Fragment() {
                 btnFullscreen.visibility = View.VISIBLE
                 btnFullscreenExit.visibility = View.GONE
             }
+
         }
     }
 

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_detail_scene">
+    android:layout_height="match_parent">
 
     <Space
         android:id="@+id/space_bottom"
@@ -156,4 +155,4 @@
         app:layout_constraintTop_toTopOf="@id/bottom_view"
         app:layout_constraintStart_toStartOf="@id/bottom_view"
         app:layout_constraintEnd_toEndOf="@id/bottom_view"/>
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

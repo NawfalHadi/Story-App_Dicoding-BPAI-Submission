@@ -23,4 +23,8 @@
     <string name="password_invalid">Password must contain at least 6 character</string>
     <string name="original_image">original image</string>
     <string name="hide_original_image">hide original image</string>
+    <string name="description">Description</string>
+    <string name="desc_field">Write image description</string>
+    <string name="submit">Submit</string>
+    <string name="image_description">Image Description</string>
 </resources>

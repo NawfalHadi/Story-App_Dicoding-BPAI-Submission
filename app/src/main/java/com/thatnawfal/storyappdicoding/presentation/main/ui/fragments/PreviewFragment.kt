@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.databinding.FragmentPreviewBinding
 import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
+import com.thatnawfal.storyappdicoding.presentation.main.ui.bottomsheet.DescriptionBottomSheet
 import com.thatnawfal.storyappdicoding.utils.rotateBitmap
 import com.thatnawfal.storyappdicoding.utils.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,9 @@ class PreviewFragment : Fragment() {
 
     private val authViewModel: AuthenticationViewModel by viewModels()
 
+    private var imageDesc : String? = null
     private var getFile: File? = null
+
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -102,6 +105,11 @@ class PreviewFragment : Fragment() {
                 launcherGallery.launch(chooser)
             }
 
+            btnSetdesc.setOnClickListener {
+                showsDescBottomSheet()
+            }
+
+
             cardviewDetail.setOnClickListener {
                 if (shadow.visibility == View.INVISIBLE) {
                     shadow.visibility = View.VISIBLE
@@ -116,8 +124,19 @@ class PreviewFragment : Fragment() {
         }
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {DescriptionBottomSheet::class.java.simpleName
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun showsDescBottomSheet() {
+        val currentDialog = parentFragmentManager.findFragmentByTag(DescriptionBottomSheet::class.java.simpleName)
+        if (currentDialog == null){
+            DescriptionBottomSheet(object : DescriptionBottomSheet.OnDescriptionChanged {
+                override fun descriptionChanged(desc: String?) {
+                    imageDesc = desc
+                }
+            }, imageDesc).show(parentFragmentManager, DescriptionBottomSheet::class.java.simpleName)
+        }
     }
 
     companion object {
