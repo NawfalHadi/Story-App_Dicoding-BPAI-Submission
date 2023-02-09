@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in">Masuk</string>
+    <string name="password">Kata Sandi</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Daftar</string>
+    <string name="enter_a_new_password">Masukkan kata sandi baru</string>
+    <string name="enter_your_name">Masukkan nama kamu</string>
+    <string name="enter_your_email">Masukkan email kamu</string>
+
+    <string name="upload_story">Unggah Cerita</string>
+    <string name="backdrop_story">backdrop story</string>
+    <string name="full_image_of_story">full image of story</string>
+    <string name="use_camera">Gunakan camera</string>
+    <string name="add_story">Tambah cerita</string>
+    <string name="choose_image">Pilih gambar</string>
+    <string name="switch_camera">Ganti camera</string>
+    <string name="rotate_image">Putar camera</string>
+
+    <string name="email_invalid">Email yang dimasukkan tidak valid</string>
+    <string name="password_invalid">Masukkan kata sandi setidaknya 6 karakter</string>
+    <string name="original_image">Gambar asli</string>
+    <string name="hide_original_image">Sembunyikan gambar asli</string>
+    <string name="description">Deskripsi</string>
+    <string name="desc_field">Masukkan deskripsi gambar</string>
+
+    <string name="submit">Submit</string>
+
+    <string name="image_description">Deskripsi Gambar</string>
+</resources>

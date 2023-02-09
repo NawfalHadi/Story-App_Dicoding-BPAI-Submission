@@ -29,6 +29,7 @@ class ListFragment : Fragment() {
 
     private val storyViewModel: StoryViewModel by viewModels()
     private val authViewModel: AuthenticationViewModel by viewModels()
+
     private val storyAdapter: StoryAdapter by lazy { StoryAdapter() }
 
     override fun onCreateView(
@@ -42,6 +43,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
         authViewModel.getSession().observe(viewLifecycleOwner){
             showStories("Bearer ${it.token}")
         }

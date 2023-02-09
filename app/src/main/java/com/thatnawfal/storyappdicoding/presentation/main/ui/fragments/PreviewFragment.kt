@@ -19,10 +19,18 @@ import androidx.navigation.fragment.findNavController
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.databinding.FragmentPreviewBinding
 import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
+import com.thatnawfal.storyappdicoding.presentation.main.bussiness.StoryViewModel
 import com.thatnawfal.storyappdicoding.presentation.main.ui.bottomsheet.DescriptionBottomSheet
+import com.thatnawfal.storyappdicoding.utils.reduceFileImage
 import com.thatnawfal.storyappdicoding.utils.rotateBitmap
 import com.thatnawfal.storyappdicoding.utils.uriToFile
+import com.thatnawfal.storyappdicoding.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 @AndroidEntryPoint
@@ -31,7 +39,9 @@ class PreviewFragment : Fragment() {
     private lateinit var binding: FragmentPreviewBinding
 
     private val authViewModel: AuthenticationViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels()
 
+    private var apiToken : String = ""
     private var imageDesc : String? = null
     private var getFile: File? = null
 
@@ -79,6 +89,7 @@ class PreviewFragment : Fragment() {
     private fun dataSetup() {
         authViewModel.getSession().observe(viewLifecycleOwner){
             binding.tvNamesPreview.text = it.name
+            apiToken = "Bearer ${it.token}"
         }
 
         val cameraxResult: File? = findNavController().currentBackStackEntry?.savedStateHandle?.get<File>(
@@ -105,6 +116,10 @@ class PreviewFragment : Fragment() {
                 launcherGallery.launch(chooser)
             }
 
+            buttonAdd.setOnClickListener {
+                uploadImage()
+            }
+
             btnSetdesc.setOnClickListener {
                 showsDescBottomSheet()
             }
@@ -119,6 +134,38 @@ class PreviewFragment : Fragment() {
                     shadow.visibility = View.INVISIBLE
                     btnCamera.visibility = View.GONE
                     btnGallery.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun uploadImage() {
+        val file = reduceFileImage(getFile as File)
+
+        val description = imageDesc?.toRequestBody("text/plain".toMediaType())
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "photo",
+            file.name,
+            requestImageFile
+        )
+
+        storyViewModel.uploadStory(
+            apiToken, imageMultipart, description ?: " ".toRequestBody()
+        ).observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Error -> {
+                    // Do Nothing
+                }
+                is Resource.Loading -> {
+                    // Do Nothing
+                }
+                is Resource.Success -> {
+                    // It Should Start Animation that close anything first
+                    findNavController().popBackStack()
+                }
+                else -> {
+                    // Do Nothing
                 }
             }
         }

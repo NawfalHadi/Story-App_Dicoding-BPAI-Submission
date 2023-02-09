@@ -33,3 +33,10 @@ data class Story(
     @SerializedName("photoUrl")
     val photoUrl: String?
 ) : Parcelable
+
+data class UploadResponse(
+    @SerializedName("message")
+    val message: String?,
+    @SerializedName("error")
+    val error: Boolean
+)

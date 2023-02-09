@@ -3,6 +3,7 @@ package com.thatnawfal.storyappdicoding.data.remote.service
 import com.thatnawfal.storyappdicoding.data.remote.response.LoginResponse
 import com.thatnawfal.storyappdicoding.data.remote.response.LoginResult
 import com.thatnawfal.storyappdicoding.data.remote.response.StoryResponse
+import com.thatnawfal.storyappdicoding.data.remote.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -35,7 +36,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
-    ): Call<StoryResponse>
+    ): Call<UploadResponse>
 
     @Multipart
     @POST("v1/stories")
@@ -45,7 +46,7 @@ interface ApiService {
         @Part("description") description: RequestBody,
         @Part("lat") lat: RequestBody,
         @Part("lon") lon: RequestBody,
-    ): Call<StoryResponse>
+    ): Call<UploadResponse>
 
     // Shows Story
 

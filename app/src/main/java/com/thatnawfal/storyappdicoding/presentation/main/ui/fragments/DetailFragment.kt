@@ -39,7 +39,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
 
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)
