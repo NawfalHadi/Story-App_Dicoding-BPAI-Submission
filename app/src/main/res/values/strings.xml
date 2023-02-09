@@ -29,4 +29,9 @@
     <string name="desc_field">Write image description</string>
     <string name="submit">Submit</string>
     <string name="image_description">Image Description</string>
+
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+    <string name="app_widget_description" translatable="false">This is an app widget description</string>
+    <string name="empty_text">No Data</string>
 </resources>

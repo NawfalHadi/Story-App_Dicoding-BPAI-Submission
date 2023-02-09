@@ -27,4 +27,5 @@
     <string name="submit">Submit</string>
 
     <string name="image_description">Deskripsi Gambar</string>
+    <string name="empty_text">No Data</string>
 </resources>
