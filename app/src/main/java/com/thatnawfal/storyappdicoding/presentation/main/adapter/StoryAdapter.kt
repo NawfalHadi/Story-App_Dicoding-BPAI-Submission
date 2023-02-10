@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -50,10 +51,15 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         @SuppressLint("ClickableViewAccessibility")
         fun bindingView(story: Story) {
 
-            binding.ivItemStoryFull.load(story.photoUrl)
-            binding.ivDetail.load(story.photoUrl)
+            with(binding){
+                tvNames.text = "${story.name}"
 
-            binding.tvNames.text = "${story.name}"
+                ivItemStoryFull.load(story.photoUrl)
+                ivDetail.load(story.photoUrl)
+
+                ViewCompat.setTransitionName(cvItemStory, "idImage-${story.id}")
+            }
+
 
             binding.cvItemStory.setOnClickListener {
                 val extras = FragmentNavigatorExtras(

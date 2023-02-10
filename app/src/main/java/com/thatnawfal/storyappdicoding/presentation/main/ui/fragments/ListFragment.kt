@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigator
@@ -18,7 +19,6 @@ import com.thatnawfal.storyappdicoding.databinding.FragmentListBinding
 import com.thatnawfal.storyappdicoding.presentation.auth.bussiness.AuthenticationViewModel
 import com.thatnawfal.storyappdicoding.presentation.main.adapter.StoryAdapter
 import com.thatnawfal.storyappdicoding.presentation.main.bussiness.StoryViewModel
-import com.thatnawfal.storyappdicoding.presentation.main.ui.HomeActivity
 import com.thatnawfal.storyappdicoding.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +43,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
+//        postponeEnterTransition()
         authViewModel.getSession().observe(viewLifecycleOwner){
             showStories("Bearer ${it.token}")
         }
@@ -68,6 +68,10 @@ class ListFragment : Fragment() {
                         storyAdapter.setItem(it.payload?.listStory!!)
                         initRecyclerView()
                         fragmentlistMotionlayout.transitionToEnd()
+
+//                        (view?.parent as? ViewGroup)?.doOnPreDraw {
+//                            startPostponedEnterTransition()
+//                        }
                     }
                     is Resource.Empty -> Log.e("Stories", "Empty")
                     is Resource.Error -> Log.e("Stories", it.message.toString())
@@ -87,6 +91,7 @@ class ListFragment : Fragment() {
 
         storyAdapter.itemListener(object : StoryAdapter.OnStoryClickedCallback {
             override fun storyClicked(story: Story, extras: FragmentNavigator.Extras) {
+//                val action = ListFragmentDirections.actionListFragmentToDetailFragment(story)
                 val mBundle = Bundle()
                 mBundle.putParcelable(DetailFragment.STORY_KEY, story)
                 findNavController().navigate(R.id.action_listFragment_to_detailFragment, mBundle, null, extras)

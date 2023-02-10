@@ -6,8 +6,11 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.thatnawfal.storyappdicoding.R
 import com.thatnawfal.storyappdicoding.data.remote.response.Story
@@ -20,11 +23,16 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
 
     private lateinit var storyData : Story
+    private val navArg : DetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(
+            android.R.transition.move
+        )
+
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
     }
 
     override fun onCreateView(
@@ -40,6 +48,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
 
+//        storyData = navArg.story
         storyData = arguments?.getParcelable(STORY_KEY)!!
         bindingView(storyData)
 
@@ -47,8 +56,12 @@ class DetailFragment : Fragment() {
 
     private fun bindingView(story: Story) {
         with(binding){
-            ivDetail.load(story.photoUrl)
+            ivDetail.load(story.photoUrl).apply {
+                ViewCompat.setTransitionName(cardviewDetail, "CardImage")
+            }
             ivOriginal.load(story.photoUrl)
+
+
             tvNames.text = story.name
             tvDesc.text = story.description
 

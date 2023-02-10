@@ -51,8 +51,9 @@ dependencies {
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     //Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 
     //Recycler View
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

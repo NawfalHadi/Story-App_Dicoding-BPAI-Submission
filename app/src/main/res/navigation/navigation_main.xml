@@ -24,7 +24,11 @@
         android:id="@+id/detailFragment"
         android:name="com.thatnawfal.storyappdicoding.presentation.main.ui.fragments.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail"/>
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="Story"
+            app:argType="com.thatnawfal.storyappdicoding.data.remote.response.Story" />
+    </fragment>
     <fragment
         android:id="@+id/previewFragment"
         android:name="com.thatnawfal.storyappdicoding.presentation.main.ui.fragments.PreviewFragment"
