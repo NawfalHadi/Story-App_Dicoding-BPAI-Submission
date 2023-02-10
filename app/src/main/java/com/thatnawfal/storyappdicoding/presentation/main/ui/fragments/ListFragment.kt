@@ -48,8 +48,14 @@ class ListFragment : Fragment() {
             showStories("Bearer ${it.token}")
         }
 
+        binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_previewFragment)
+        }
         binding.bgBtnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_previewFragment)
+        }
+        binding.btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_profileFragment)
         }
     }
 

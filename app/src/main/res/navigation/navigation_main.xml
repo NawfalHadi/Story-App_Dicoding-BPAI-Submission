@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_listFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -36,4 +39,8 @@
         android:name="com.thatnawfal.storyappdicoding.presentation.main.ui.fragments.CameraFragment"
         android:label="CameraFragment"
         tools:layout="@layout/layout_camerax"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.thatnawfal.storyappdicoding.presentation.main.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

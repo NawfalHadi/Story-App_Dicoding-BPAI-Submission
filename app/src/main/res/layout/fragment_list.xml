@@ -39,6 +39,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/add_story" />
 
+    <ImageButton
+        android:id="@+id/btn_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_circle_orange_200"
+        android:contentDescription="@string/add_story"
+        android:elevation="2dp"
+        android:padding="12dp"
+
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bg_btn_add" />
+
+
+
     <ImageView
         android:id="@+id/bg_btn_add"
         android:layout_width="100dp"
