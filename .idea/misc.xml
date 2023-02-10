@@ -23,7 +23,7 @@
         <entry key="app/src/main/res/layout/bottomsheet_description.xml" value="0.25929283771532186" />
         <entry key="app/src/main/res/layout/fragment_add_story.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_preview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_stories_widget.xml" value="0.25929283771532186" />
